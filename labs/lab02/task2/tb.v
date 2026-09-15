@@ -4,7 +4,13 @@
 module tb;
 
   // TODO: declare the inputs and outputs
+  reg  [1:0] t_sel;
+  wire [7:0] t_dout;
 
+  lut DUT (
+    .sel (t_sel),
+    .dout(t_dout)
+  );
   // TODO: instantiate DUT here
 
   // Waveform dump configuration (DO NOT CHANGE)
@@ -18,10 +24,14 @@ module tb;
 
   initial begin
     // TODO: apply different input combinations
-
+      t_sel = 2'd0;
+    #5 t_sel = 2'd1;
+    #5 t_sel = 2'd2;
+    #5 t_sel = 2'd3;
+    #5 $finish;
   end
 
-  initial
-    $monitor($time, " I0=%b I1=%b S=%b | Y=%b", t_i0, t_i1, t_s, t_y); // change as required
+initial
+  $monitor($time, " sel=%b | dout=%0d", t_sel, t_dout);// change as required
 
 endmodule
